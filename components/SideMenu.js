@@ -8,7 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { Calendar } from "mdi-material-ui";
+import { Calendar, CheckboxMarkedCircleOutline } from "mdi-material-ui";
 import styled from "styled-components";
 
 const StyledDrawer = styled(Drawer).attrs(({ width, PaperProps }) => ({
@@ -58,6 +58,14 @@ const DrawerContent = () => (
           <Calendar />
         </ListItemIcon>
         <ListItemText primary="Events" />
+      </ListItem>
+    </Link>
+    <Link href="/review" passHref>
+      <ListItem button component="a">
+        <ListItemIcon>
+          <CheckboxMarkedCircleOutline />
+        </ListItemIcon>
+        <ListItemText primary="Review" />
       </ListItem>
     </Link>
   </List>
