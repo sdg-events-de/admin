@@ -12,14 +12,16 @@ const COLUMNS = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
-    renderCell: ({ row }) => (
-      // TODO: Enable viewing of events
-      //   <Link href=`/events/${row.id}` passHref>
-      <Button variant="contained" color="primary" size="small" disabled>
-        View
-      </Button>
-      //   </Link>
-    ),
+    renderCell: function ActionCell() {
+      return (
+        // TODO: Enable viewing of events
+        //   <Link href=`/events/${row.id}` passHref>
+        <Button variant="contained" color="primary" size="small" disabled>
+          View
+        </Button>
+        //   </Link>
+      );
+    },
   },
 ];
 

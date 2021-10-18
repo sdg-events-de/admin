@@ -12,13 +12,15 @@ const COLUMNS = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
-    renderCell: ({ row }) => (
-      // <Link href={reviewOrganizationUrl(row)} passHref>
-      <Button variant="contained" color="primary" size="small" disabled>
-        Review
-      </Button>
-      // </Link>
-    ),
+    renderCell: function ActionCell() {
+      return (
+        // <Link href={reviewOrganizationUrl(row)} passHref>
+        <Button variant="contained" color="primary" size="small" disabled>
+          Review
+        </Button>
+        // </Link>
+      );
+    },
   },
 ];
 
