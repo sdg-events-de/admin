@@ -12,3 +12,9 @@ export const fetchEvents = () => fetchJson(endpoint("/events"));
 // Fetch all events that need to be reviewed
 export const fetchEventsNeedingReview = () =>
   fetchJson(endpoint("/events/review"));
+
+// Fetch all logs
+export const fetchLogs = () => fetchJson(endpoint("/logs"));
+
+// Fetch one log
+export const fetchLog = ({ id }) => fetchJson(endpoint(`/logs/${id}`));
