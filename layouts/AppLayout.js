@@ -19,7 +19,7 @@ const AppLayout = ({ children, contentBoxProps = {} }) => {
           showMobileSideMenu={showMobileSideMenu}
           onCloseMobileSideMenu={closeMobileSideMenu}
         />
-        <Container fluid maxWidth={null} style={{ display: "flex" }}>
+        <Container maxWidth={null} style={{ display: "flex" }}>
           <Box paddingY={3} display="flex" flexGrow={1} flexDirection="column">
             {children}
           </Box>
