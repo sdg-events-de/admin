@@ -52,7 +52,7 @@ const LogPage = ({ log }) => (
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell colspan={2}>Properties</TableCell>
+              <TableCell colSpan={2}>Properties</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
