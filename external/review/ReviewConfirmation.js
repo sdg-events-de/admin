@@ -22,7 +22,7 @@ const ReviewConfirmation = observer(({ onSubmit, steps }) => {
               Review
             </Typography>
             {steps.map((step) => (
-              <step.ConfirmationComponent step={step} />
+              <step.ConfirmationComponent step={step} key={step.field} />
             ))}
           </Box>
         </Box>
