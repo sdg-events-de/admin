@@ -64,7 +64,7 @@ const DrawerContent = () => (
         <ListItemText primary="Events" />
       </ListItem>
     </Link>
-    <Link href="/review" passHref>
+    <Link href="/reviews" passHref>
       <ListItem button component="a">
         <ListItemIcon>
           <CheckboxMarkedCircleOutline />

@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { Box, Button, Paper, Typography } from "@material-ui/core";
 import { DataGrid } from "@mui/x-data-grid";
 import AppLayout from "layouts/AppLayout";
+import { reviewEventUrl } from "helpers/routing";
 
 const COLUMNS = [
   { field: "id", headerName: "ID", width: 100 },
@@ -12,13 +14,13 @@ const COLUMNS = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
-    renderCell: function ActionCell() {
+    renderCell: function ActionCell({ row }) {
       return (
-        // <Link href={reviewOrganizationUrl(row)} passHref>
-        <Button variant="contained" color="primary" size="small" disabled>
-          Review
-        </Button>
-        // </Link>
+        <Link href={reviewEventUrl({ id: row.id })} passHref>
+          <Button variant="contained" color="primary" size="small">
+            Review
+          </Button>
+        </Link>
       );
     },
   },
