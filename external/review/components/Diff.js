@@ -62,14 +62,14 @@ const Diff = ({ before, after }) => {
       {parts.length === 1 && parts[0].value === "" && (
         <Plain style={{ fontStyle: "italic" }}>No value</Plain>
       )}
-      {/* {parts.map((part) => {
+      {parts.map((part) => {
         const key = getUniqueKey();
 
         if (part.added) return <Addition key={key}>{part.value}</Addition>;
         if (part.removed) return <Removal key={key}>{part.value}</Removal>;
 
         return <Plain key={key}>{part.value}</Plain>;
-      })} */}
+      })}
     </>
   );
 };
