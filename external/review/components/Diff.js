@@ -3,25 +3,29 @@ import { green, red, grey as gray } from "@material-ui/core/colors";
 import styled from "styled-components";
 import { diffWordsWithSpace, diffChars } from "diff";
 
-const StyledSpan = styled.span`
-  color: ${({ styled }) => {
-    if (styled?.isAdded) return green[700];
-    if (styled?.isRemoved) return red[700];
-    return gray[700];
-  }};
+const Plain = styled.span`
+  color: ${gray[700]};
+`;
 
-  text-decoration: ${({ styled }) =>
-    styled?.isRemoved ? "line-through" : "none"};
+const Addition = styled.span`
+  color: ${green[700]};
+  background-color: ${green[100]};
+`;
+
+const Removal = styled.span`
+  color: ${red[700]};
+  background-color: ${red[100]};
+  text-decoration: line-through;
 `;
 
 const safelyClearTimeout = (timeout) => {
   if (timeout) clearTimeout(timeout);
 };
 
-let uniqueId = 0;
-function getUniqueId() {
-  uniqueId += 1;
-  return uniqueId;
+let uniqueKey = 0;
+function getUniqueKey() {
+  uniqueKey += 1;
+  return uniqueKey;
 }
 
 const Diff = ({ before, after }) => {
@@ -43,7 +47,7 @@ const Diff = ({ before, after }) => {
     else {
       timeoutRef.current = setTimeout(
         () => setParts(diffWordsWithSpace(before, after)),
-        1000
+        500
       );
     }
 
@@ -51,21 +55,21 @@ const Diff = ({ before, after }) => {
   }, [before, after]);
 
   if (parts === null)
-    return <StyledSpan style={{ fontStyle: "italic" }}>Loading...</StyledSpan>;
+    return <Plain style={{ fontStyle: "italic" }}>Loading...</Plain>;
 
   return (
     <>
       {parts.length === 1 && parts[0].value === "" && (
-        <StyledSpan style={{ fontStyle: "italic" }}>No value</StyledSpan>
+        <Plain style={{ fontStyle: "italic" }}>No value</Plain>
       )}
-      {parts.map((part) => (
-        <StyledSpan
-          key={getUniqueId()}
-          styled={{ isAdded: part.added, isRemoved: part.removed }}
-        >
-          {part.value}
-        </StyledSpan>
-      ))}
+      {/* {parts.map((part) => {
+        const key = getUniqueKey();
+
+        if (part.added) return <Addition key={key}>{part.value}</Addition>;
+        if (part.removed) return <Removal key={key}>{part.value}</Removal>;
+
+        return <Plain key={key}>{part.value}</Plain>;
+      })} */}
     </>
   );
 };
