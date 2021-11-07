@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { green, red, grey as gray } from "@material-ui/core/colors";
 import styled from "styled-components";
-const diff = require("diff");
+import { diffWordsWithSpace, diffChars } from "diff";
 
 const StyledSpan = styled.span`
   color: ${({ styled }) => {
@@ -14,22 +14,53 @@ const StyledSpan = styled.span`
     styled?.isRemoved ? "line-through" : "none"};
 `;
 
+const safelyClearTimeout = (timeout) => {
+  if (timeout) clearTimeout(timeout);
+};
+
+let uniqueId = 0;
+function getUniqueId() {
+  uniqueId += 1;
+  return uniqueId;
+}
+
 const Diff = ({ before, after }) => {
+  const timeoutRef = useRef(null);
+  const [parts, setParts] = useState(null);
+
   if (before == null) before = "";
   if (after == null) after = "";
 
-  const [parts, setParts] = useState(diff.diffChars(before, after));
+  useEffect(() => {
+    safelyClearTimeout(timeoutRef.current);
 
-  useEffect(() => setParts(diff.diffChars(before, after)), [before, after]);
+    // For short text, immediately calculate the text diff
+    if (before.length < 100 && after.length < 100) {
+      setParts(diffChars(before, after));
+    }
+    // For longer text, calculate text diff after 1 second to keep application
+    // running smooothly
+    else {
+      timeoutRef.current = setTimeout(
+        () => setParts(diffWordsWithSpace(before, after)),
+        1000
+      );
+    }
+
+    return () => safelyClearTimeout(timeoutRef.current);
+  }, [before, after]);
+
+  if (parts === null)
+    return <StyledSpan style={{ fontStyle: "italic" }}>Loading...</StyledSpan>;
 
   return (
     <>
-      {before === "" && after === "" && (
+      {parts.length === 1 && parts[0].value === "" && (
         <StyledSpan style={{ fontStyle: "italic" }}>No value</StyledSpan>
       )}
-      {parts.map((part, index) => (
+      {parts.map((part) => (
         <StyledSpan
-          key={index}
+          key={getUniqueId()}
           styled={{ isAdded: part.added, isRemoved: part.removed }}
         >
           {part.value}
