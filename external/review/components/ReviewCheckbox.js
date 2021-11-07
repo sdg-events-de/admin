@@ -13,8 +13,8 @@ const ReviewCheckBox = ({ label, value, color, ...props }) => (
   <FormControlLabel
     control={
       <StyledCheckbox
-        checked={value}
-        indeterminate={value == null}
+        checked={value === true}
+        indeterminate={value === null}
         variant="filled"
         {...props}
         styled={{
