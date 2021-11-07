@@ -55,6 +55,9 @@ export const PENDING = {
 };
 
 export const IGNORE = {
-  color: gray[300],
+  action: "ignore",
+  label: "Ignore",
+  color: gray[500],
+  iconColor: gray[300],
   icon: Percent,
 };

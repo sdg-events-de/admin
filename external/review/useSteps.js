@@ -69,6 +69,9 @@ const useStep = ({ current, suggestion, revision, ...definition }) => {
     keep() {
       this.commit(current);
     },
+    ignore() {
+      // no-op
+    },
     getColor(value) {
       return this.getActions(value)[0].color;
     },

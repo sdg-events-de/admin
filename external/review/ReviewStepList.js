@@ -45,7 +45,7 @@ const ReviewStepList = ({
         key={step.field}
         label={step.label}
         Icon={step.status.icon}
-        color={step.status.color}
+        color={step.status.iconColor || step.status.color}
         isActive={activeStep === step}
         onClick={() => setActiveStep(step)}
       />
